@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Saisie des Jobs et Machines</title>
+    <style>
+        /* Style global */
+        body {
+            font-family: 'Roboto', Arial, sans-serif;
+            background: linear-gradient(135deg, #3a7bd5, #00d2ff); /* Dégradé bleu élégant */
+            color: #333;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        /* Conteneur principal */
+        .form-container {
+            background-color: rgba(255, 255, 255, 0.9); /* Fond semi-transparent */
+            padding: 30px 40px;
+            border-radius: 12px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+            width: 100%;
+            max-width: 450px;
+            text-align: center;
+        }
+
+        /* En-tête */
+        .form-header h1 {
+            color: #004d80; /* Bleu foncé pour les titres */
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+        .form-header p {
+            font-size: 16px;
+            color: #666;
+            margin-bottom: 20px;
+        }
+
+        /* Formulaire */
+        form {
+            width: 100%;
+        }
+
+        label {
+            display: block;
+            text-align: left;
+            font-size: 16px;
+            margin-bottom: 8px;
+            color: #333;
+            font-weight: 500;
+        }
+
+        input[type="number"] {
+            width: 100%;
+            padding: 12px;
+            font-size: 16px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            outline: none;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+            margin-bottom: 20px;
+            box-sizing: border-box;
+        }
+
+        input[type="number"]:focus {
+            border-color: #007bff; /* Bleu clair */
+            box-shadow: 0 0 6px rgba(0, 123, 255, 0.5);
+        }
+
+        /* Bouton */
+        button {
+            display: inline-block;
+            width: 100%;
+            padding: 14px;
+            background-color: #007bff; /* Bleu vif */
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        button:hover {
+            background-color: #0056b3; /* Bleu plus sombre */
+            transform: scale(1.02);
+        }
+
+        /* Adaptation mobile */
+        @media (max-width: 600px) {
+            .form-container {
+                padding: 20px;
+            }
+
+            .form-header h1 {
+                font-size: 20px;
+            }
+
+            .form-header p {
+                font-size: 14px;
+            }
+
+            button {
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <div class="form-header">
+            <h1>Saisie des Jobs et Machines</h1>
+            <p>Renseignez le nombre de jobs et de machines pour démarrer le processus.</p>
+        </div>
+
+        <form method="post">
+            {% csrf_token %}
+            <div>
+                <label for="num_jobs">Nombre de Jobs :</label>
+                <input type="number" name="num_jobs" id="num_jobs" min="1" required placeholder="Ex. 5">
+            </div>
+
+            <div>
+                <label for="num_machines">Nombre de Machines :</label>
+                <input type="number" name="num_machines" id="num_machines" min="1" required placeholder="Ex. 3">
+            </div>
+
+            <button type="submit">Valider</button>
+        </form>
+    </div>
+</body>
+</html>

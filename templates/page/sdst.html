@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Temps de Réglage (SDST)</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background: linear-gradient(135deg, #3a7bd5, #00d2ff); /* Elegant gradient */
+            font-family: 'Roboto', Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            color: #333;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .form-container {
+            background: rgba(255, 255, 255, 0.95); /* Semi-transparent background */
+            border-radius: 12px;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+            padding: 30px;
+            width: 100%;
+            max-width: 1100px;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 2rem;
+            color: #004d80;
+            margin-bottom: 20px;
+        }
+
+        .info {
+            text-align: center;
+            font-size: 1rem;
+            color: #666;
+            margin-bottom: 30px;
+        }
+
+        .machine-section {
+            margin-bottom: 40px;
+        }
+
+        .machine-title {
+            font-size: 1.5rem;
+            color: #007bff;
+            margin-bottom: 15px;
+            border-bottom: 2px solid #007bff;
+            padding-bottom: 5px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            background: #fff;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        table th, table td {
+            padding: 15px;
+            text-align: center;
+            border: 1px solid #ddd;
+        }
+
+        table th {
+            background-color: #f0f0f0;
+            color: #333;
+            font-weight: bold;
+        }
+
+        input[type="number"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ced4da;
+            border-radius: 4px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        input[type="number"]:focus {
+            border-color: #007bff;
+            box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+            outline: none;
+        }
+
+        button {
+            width: 100%;
+            padding: 15px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 6px;
+            font-size: 1rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+            transform: scale(1.03);
+        }
+
+        @media (max-width: 768px) {
+            table th, table td {
+                font-size: 0.85rem;
+                padding: 10px;
+            }
+
+            .machine-title {
+                font-size: 1.2rem;
+            }
+
+            h1 {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <h1>Temps de Réglage (SDST)</h1>
+        <div class="info">
+            Veuillez saisir les temps de réglage pour chaque machine et chaque combinaison de jobs.
+        </div>
+        <form method="POST">
+            {% csrf_token %}
+            {% for m in machine_range %}
+            <div class="machine-section">
+                <h2 class="machine-title">Machine {{ m }}</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>De Job</th>
+                            <th>À Job</th>
+                            <th>Temps de Réglage</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for i in job_ids %}
+                            {% for j in job_ids %}
+                            <tr>
+                                <td>Job {{ i }}</td>
+                                <td>Job {{ j }}</td>
+                                <td>
+                                    <input
+                                        type="number"
+                                        name="setup_time_{{ i }}_{{ j }}_machine_{{ m }}"
+                                        min="0"
+                                        placeholder="0"
+                                        required>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            {% endfor %}
+            <button type="submit">Enregistrer</button>
+        </form>
+    </div>
+</body>
+</html>

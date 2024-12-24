@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diagramme de Gantt - Atelier Job Shop</title>
+    <style>
+         body {
+           background: linear-gradient(to bottom right, #1c92d2, #f2fcfe); /* Dégradé élégant */
+            color: #333;
+            font-family: 'Arial', sans-serif;
+            color: #333; /* Couleur de texte sombre pour une bonne lisibilité */
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            color: #003366;
+            text-align: center;
+            margin-top: 40px;
+            margin-bottom: 20px;
+        }
+
+        p, h2 {
+            font-size: 1.25rem;
+            color: #333;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Ombre légère pour l'effet de profondeur */
+        }
+
+        .data-section {
+            background-color: #e3f2fd; /* Bleu clair pour les sections de données */
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            border-left: 5px solid #003366; /* Bordure bleue à gauche */
+        }
+
+        .btn-custom {
+            background-color: #003366;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            display: inline-block;
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .btn-custom:hover {
+            background-color: #00509e;
+        }
+
+        img {
+            width: 100%; /* Adapter l'image à la taille du conteneur */
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Ombre autour de l'image */
+        }
+    </style>
+</head>
+<body>
+    <h1>Diagramme de Gantt pour l'atelier Job Shop</h1>
+    <p>Ce diagramme montre l'ordonnancement des tâches pour les machines 1 et 2.</p>
+
+    <!-- Conteneur pour le diagramme de Gantt -->
+    <div class="gantt-container">
+        <img src="data:image/png;base64,{{ gantt_image }}" alt="Diagramme de Gantt">
+    </div>
+</body>
+</html>

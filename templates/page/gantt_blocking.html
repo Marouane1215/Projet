@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diagramme de Gantt avec Contrainte de Blocage</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            text-align: center;
+            margin: 20px;
+        }
+        .chart {
+            margin: 20px auto;
+            display: inline-block;
+        }
+        .details {
+            margin-top: 20px;
+            text-align: left;
+        }
+        table {
+            margin: 0 auto;
+            border-collapse: collapse;
+            width: 80%;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: center;
+        }
+        th {
+            background-color: #f4f4f4;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Diagramme de Gantt avec Contrainte de Blocage</h1>
+
+        <!-- Image du diagramme de Gantt -->
+        <div class="chart">
+            <img src="data:image/png;base64,{{ graph }}" alt="Diagramme de Gantt">
+        </div>
+
+        <!-- Détails des jobs -->
+        <div class="details">
+            <h2>Détails des Jobs</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Job ID</th>
+                        <th>Arrivée</th>
+                        <th>Machines</th>
+                        <th>Temps Total</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for job in jobs_details %}
+                    <tr>
+                        <td>{{ job.job_id }}</td>
+                        <td>{{ job.arrival_date }}</td>
+                        <td>
+                            {% for machine_time in job.machine_times %}
+                                M{{ forloop.counter }}: {{ machine_time.processing_time }}
+                                {% if not forloop.last %} | {% endif %}
+                            {% endfor %}
+                        </td>
+                        <td>{{ job.total_time }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Résumé -->
+        <div class="summary">
+            <h2>Résumé</h2>
+            <p><strong>Nombre de Jobs :</strong> {{ num_jobs }}</p>
+            <p><strong>Nombre de Machines :</strong> {{ num_machines }}</p>
+            <p><strong>Temps Maximum (Cmax) :</strong> {{ cmax }}</p>
+        </div>
+    </div>
+</body>
+</html>

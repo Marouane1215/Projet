@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Accueil - Ordonnancement</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        /* Arrière-plan bleu professionnel avec un dégradé plus doux */
+        body {
+            font-family: 'Roboto', Arial, sans-serif;
+            background: linear-gradient(to bottom right, #4a90e2, #007bff); /* Dégradé bleu élégant */
+            margin: 0;
+            padding: 0;
+            text-align: center;
+            color: white;
+        }
+
+        h1 {
+            color: #ffffff;
+            font-size: 2.5rem;
+            margin-top: 60px;
+            margin-bottom: 20px;
+        }
+
+        .container {
+            max-width: 700px;
+            margin: 50px auto;
+            padding: 30px;
+            background: #ffffff;
+            border-radius: 15px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+            color: #333;
+        }
+
+        p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            color: #333;
+        }
+
+        .button-group {
+            margin-top: 30px;
+        }
+
+        button {
+            font-size: 1.2rem;
+            padding: 14px 32px;
+            margin: 15px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            width: 100%;
+        }
+
+        /* Bouton 1 : Rouge */
+        .btn-danger {
+            background-color: #e53935; /* Rouge vif */
+            color: white;
+            border: none;
+        }
+
+        .btn-danger:hover {
+            background-color: #d32f2f; /* Rouge foncé au survol */
+            transform: scale(1.05);
+        }
+
+        .btn-danger:active {
+            background-color: #c62828; /* Rouge encore plus foncé au clic */
+        }
+
+        /* Bouton 2 : Vert */
+        .btn-success {
+            background-color: #43a047; /* Vert */
+            color: white;
+            border: none;
+        }
+
+        .btn-success:hover {
+            background-color: #388e3c; /* Vert foncé au survol */
+            transform: scale(1.05);
+        }
+
+        .btn-success:active {
+            background-color: #2e7d32; /* Vert encore plus foncé au clic */
+        }
+
+        /* Bouton 3 : Jaune */
+        .btn-warning {
+            background-color: #fbc02d; /* Jaune */
+            color: white;
+            border: none;
+        }
+
+        .btn-warning:hover {
+            background-color: #f57f17; /* Jaune foncé au survol */
+            transform: scale(1.05);
+        }
+
+        .btn-warning:active {
+            background-color: #f57f17; /* Jaune plus foncé au clic */
+        }
+
+        /* Styles responsives pour une meilleure lisibilité sur mobile */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 1.8rem;
+            }
+
+            .button-group button {
+                width: 100%;
+                margin: 10px 0;
+            }
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Ordonnancement des Jobs</h1>
+        <p>Sélectionnez le mode d'ordonnancement :</p>
+
+        <div class="button-group">
+            <!-- Formulaire vers MPr -->
+            <form method="GET" action="{% url 'MPr' %}">
+                <button class="btn btn-danger" type="submit">MP avec date d'arrivée</button>
+            </form>
+
+            <!-- Formulaire vers gantt_view_with_arrival -->
+            <form method="GET" action="{% url 'gantt_view' %}">
+                <button class="btn btn-success" type="submit">MP sans date d'arrivée</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

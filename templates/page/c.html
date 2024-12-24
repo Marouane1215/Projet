@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Temps de Réglage Enregistré</title>
+</head>
+<body>
+    <h1>Temps de Réglage Enregistré</h1>
+    {% if error %}
+        <p>{{ error }}</p>
+    {% else %}
+        <table>
+            <thead>
+                <tr>
+                    <th>Machine</th>
+                    <th>De Job</th>
+                    <th>À Job</th>
+                    <th>Temps de Réglage</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for m, machine_data in setup_time.items %}
+                    {% for job_courant, job_data in machine_data.items %}
+                        {% for job_precedent, setup_time_value in job_data.items %}
+                        <tr>
+                            <td>Machine {{ m }}</td>
+                            <td>{{ job_precedent }}</td>
+                            <td>{{ job_courant }}</td>
+                            <td>{{ setup_time_value }}</td>
+                        </tr>
+                        {% endfor %}
+                    {% endfor %}
+                {% endfor %}
+            </tbody>
+        </table>
+    {% endif %}
+</body>
+</html>

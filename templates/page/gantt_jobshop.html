@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diagramme de Gantt - Ordonnancement des Jobs SOP</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #e3f2fd; /* Fond bleu ciel */
+            color: #333; /* Texte sombre pour un bon contraste */
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            text-align: center;
+            color: #0d47a1; /* Bleu foncé pour le titre */
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-top: 40px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 50px auto;
+            padding: 30px;
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        p {
+            font-size: 1.2rem;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        strong {
+            color: #0d47a1; /* Bleu foncé pour les titres de données */
+            font-weight: bold;
+        }
+
+        img {
+            display: block;
+            width: 100%;
+            max-width: 100%;
+            margin: 30px 0;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Ombre légère autour de l'image */
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            font-size: 1rem;
+            color: #0d47a1;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Diagramme de Gantt - Ordonnancement (Job Shop sans preaparation) </h1>
+
+    <p><strong>Cmax :</strong> {{ Cmax }}</p>
+
+    <img src="data:image/png;base64,{{ image_base64 }}" alt="Diagramme de Gantt">
+
+</div>
+
+
+</body>
+</html>

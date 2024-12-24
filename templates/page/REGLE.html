@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Choix des Règles de Priorité</title>
+    <style>
+        /* Global Styles */
+        body {
+            font-family: 'Roboto', Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #3a7bd5, #00d2ff); /* Gradient background */
+            color: #333;
+        }
+
+        /* Form Container */
+        form {
+            background: rgba(255, 255, 255, 0.95); /* Semi-transparent background */
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 1.8rem;
+            color: #004d80;
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            font-size: 1rem;
+            color: #495057;
+            margin-bottom: 15px;
+            cursor: pointer;
+            text-align: left;
+        }
+
+        input[type="radio"] {
+            margin-right: 10px;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            background-color: #007bff;
+            border: none;
+            border-radius: 8px;
+            color: white;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            text-transform: uppercase;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+            transform: scale(1.03);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 600px) {
+            form {
+                padding: 20px;
+            }
+
+            h1 {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <form method="post">
+        <h1>Choisissez une Règle de Priorité</h1>
+        {% csrf_token %}
+
+        <label>
+            <input type="radio" name="regle" value="FIFO" required>
+            FIFO (First In, First Out)
+        </label>
+
+        <label>
+            <input type="radio" name="regle" value="LIFO">
+            LIFO (Last In, First Out)
+        </label>
+
+        <label>
+            <input type="radio" name="regle" value="SPT">
+            SPT (Shortest Processing Time)
+        </label>
+
+        <label>
+            <input type="radio" name="regle" value="EDD">
+            EDD (Earliest Due Date)
+        </label>
+
+        <label>
+            <input type="radio" name="regle" value="LPT">
+            LPT (Longest Processing Time)
+        </label>
+
+        <button type="submit">Enregistrer</button>
+    </form>
+</body>
+</html>

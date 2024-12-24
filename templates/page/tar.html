@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Taux de Fonctionnement et d'Arrêt</title>
+    <style>
+        /* Arrière-Plan */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Roboto', Arial, sans-serif;
+            min-height: 100vh;
+            background: linear-gradient(to right, #1c92d2, #f2fcfe); /* Dégradé élégant */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #333;
+        }
+
+        /* Conteneur Principal */
+        .container {
+            background: rgba(255, 255, 255, 0.9); /* Fond semi-transparent */
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2); /* Ombre subtile */
+            padding: 30px;
+            max-width: 800px;
+            width: 90%;
+            text-align: center;
+        }
+
+        /* Titre */
+        h1 {
+            font-size: 2rem;
+            color: #004d80;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            text-align: center;
+        }
+
+        /* Image */
+        img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1); /* Ombre légère */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Taux de Fonctionnement et d'Arrêt des Machines</h1>
+        <img src="data:image/png;base64,{{ graphic }}" alt="Histogramme des Taux">
+    </div>
+</body>
+</html>

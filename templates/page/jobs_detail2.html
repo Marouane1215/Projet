@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Saisie des Informations des Jobs</title>
+    <style>
+        /* Style général */
+        body {
+            font-family: 'Roboto', Arial, sans-serif;
+            background: linear-gradient(135deg, #3a7bd5, #00d2ff); /* Dégradé bleu professionnel */
+            color: #333;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        /* Conteneur principal */
+        .form-container {
+            background-color: rgba(255, 255, 255, 0.9); /* Fond semi-transparent */
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+            width: 100%;
+            max-width: 800px;
+        }
+
+        /* Texte et en-tête */
+        .form-header p {
+            font-size: 16px;
+            color: #555;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .form-header h3 {
+            color: #004d80;
+            margin-bottom: 10px;
+            text-align: left;
+        }
+
+        /* Table */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+            font-size: 14px;
+        }
+
+        table th, table td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: center;
+        }
+
+        table th {
+            background-color: #004d80;
+            color: #fff;
+        }
+
+        table td select, table td input {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 14px;
+            box-sizing: border-box;
+        }
+
+        table td select:focus, table td input:focus {
+            border-color: #007bff;
+            box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+            outline: none;
+        }
+
+        /* Bouton */
+        button {
+            display: block;
+            width: 100%;
+            padding: 14px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+            transform: scale(1.02);
+        }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <div class="form-header">
+            <p>Veuillez remplir les informations pour chaque job. Sélectionnez une machine et entrez le temps de traitement pour chaque étape.</p>
+        </div>
+
+        <form method="POST">
+            {% csrf_token %}
+            {% for job in jobs_range %}
+            <div class="job-section">
+                <h3>Job {{ job }}</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Étape</th>
+                            <th>Machine assignée</th>
+                            <th>Temps de traitement (en unités)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for operation in machines_range %}
+                        <tr>
+                            <td>Étape {{ operation }}</td>
+                            <td>
+                                <select name="machine_{{ job }}_{{ operation }}" required>
+                                    <option value="" disabled selected>Choisir une machine</option>
+                                    {% for m in machines_range %}
+                                    <option value="{{ m }}">Machine {{ m }}</option>
+                                    {% endfor %}
+                                </select>
+                            </td>
+                            <td>
+                                <input type="number" name="temps_{{ job }}_{{ operation }}" placeholder="Temps" min="1" required>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            {% endfor %}
+            <button type="submit">Valider</button>
+        </form>
+    </div>
+</body>
+</html>

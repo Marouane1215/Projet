@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Création d'un Job</title>
+    <style>
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .error-message {
+            color: red;
+        }
+        .form-control {
+            width: 100%;
+            padding: 8px;
+            margin: 5px 0;
+        }
+        .machine-form {
+            border: 1px solid #ddd;
+            padding: 15px;
+            margin-bottom: 10px;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        .add-machine-btn {
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Création d'un nouveau Job</h1>
+
+    <form method="post" novalidate>
+        {% csrf_token %}
+
+        <div class="form-group">
+            <h2>Informations du Job</h2>
+            {% for field in job_form %}
+                <div>
+                    <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                    {{ field }}
+                    {% if field.errors %}
+                        <div class="error-message">
+                            {% for error in field.errors %}
+                                {{ error }}
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                </div>
+            {% endfor %}
+        </div>
+
+        <h2>Temps de traitement sur les machines</h2>
+        {{ machine_formset.management_form }}
+        <div id="machine-forms">
+            {% for form in machine_formset %}
+                <div class="machine-form">
+                    {% for field in form %}
+                        <div class="form-group">
+                            <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                            {{ field }}
+                            {% if field.errors %}
+                                <div class="error-message">
+                                    {% for error in field.errors %}
+                                        {{ error }}
+                                    {% endfor %}
+                                </div>
+                            {% endif %}
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endfor %}
+        </div>
+
+        <button type="button" class="add-machine-btn" onclick="addMachineForm()">Ajouter une machine</button>
+        <button type="submit">Enregistrer le Job</button>
+    </form>
+
+    <script>
+        function addMachineForm() {
+            const formsContainer = document.getElementById('machine-forms');
+            const formCount = document.getElementById('id_machines-TOTAL_FORMS');
+            const newForm = document.querySelector('.machine-form').cloneNode(true);
+
+            // Mettre à jour les indices des champs
+            const newIndex = parseInt(formCount.value);
+            newForm.innerHTML = newForm.innerHTML.replace(/-\d+-/g, `-${newIndex}-`);
+
+            // Réinitialiser les valeurs des champs
+            newForm.querySelectorAll('input').forEach(input => input.value = '');
+
+            formsContainer.appendChild(newForm);
+            formCount.value = newIndex + 1;
+        }
+    </script>
+</body>
+</html>

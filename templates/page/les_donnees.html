@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Les Données</title>
+</head>
+<body>
+    <h1>Détails des Données</h1>
+
+    <h2>Nombre de Jobs : {{ num_jobs }}</h2>
+    <h2>Nombre de Machines : {{ num_machines }}</h2>
+
+    <h3>Détails des Jobs :</h3>
+    <ul>
+        {% for job in jobs_details %}
+            <li>
+                <strong>Job {{ job.job_id }}</strong><br>
+                Arrivée : {{ job.arrival_date }}<br>
+                Livraison : {{ job.delivery_date }}<br>
+                <ul>
+                    {% for machine in job.machine_times %}
+                        <li>
+                            Machine {{ machine.machine_id }} - Temps de préparation : {{ machine.preparation_time }}
+                        </li>
+                    {% endfor %}
+                </ul>
+            </li>
+        {% endfor %}
+    </ul>
+
+    <h3>Contrainte Sélectionnée : {{ contrainte }}</h3>
+<h3>Règle de Priorité : {{ regle }}</h3>
+</body>
+</html>

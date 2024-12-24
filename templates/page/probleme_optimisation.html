@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Saisie des Jobs et Machines</title>
+</head>
+<body>
+    <h1>Saisie du nombre de Jobs et de Machines</h1>
+    <form method="post">
+        {% csrf_token %}
+        <label for="num_jobs">Nombre de Jobs :</label>
+        <!-- Limitation de la valeur maximale à 10 -->
+        <input type="number" name="num_jobs" id="num_jobs" min="1" max="10" required><br><br>
+
+        <label for="num_machines">Nombre de Machines :</label>
+        <input type="number" name="num_machines" id="num_machines" min="1" required><br><br>
+
+        <button type="submit">Valider</button>
+    </form>
+
+    <!-- Affichage des messages d'erreur Django -->
+    {% if messages %}
+    <ul>
+        {% for message in messages %}
+        <li style="color: red;">{{ message }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+</body>
+</html>

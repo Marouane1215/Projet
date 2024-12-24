@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Setup Time Form</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: center;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        input[type="text"] {
+            width: 100%;
+            box-sizing: border-box;
+        }
+    </style>
+</head>
+<body>
+<form method="post">
+    {% csrf_token %}
+    <table>
+        <thead>
+            <tr>
+                <th>From Job \ To Job</th>
+                {% for job1 in num_jobs %}
+                    <th>Job {{ job1 }}</th>
+                {% endfor %}
+            </tr>
+        </thead>
+        <tbody>
+            {% for machine in num_machines %}
+                <tr>
+                    <td colspan="{{ num_jobs|length + 1 }}" style="background-color: #ddd; font-weight: bold;">
+                        Setup Times for Machine {{ machine }}
+                    </td>
+                </tr>
+                {% for job1 in num_jobs %}
+                    <tr>
+                        <td>Job {{ job1 }}</td>
+                        {% for job2 in num_jobs %}
+                            <td>
+                                {% with 'machine_'|add:machine|add:'_j'|add:job1|add:'_j'|add:job2 as input_name %}
+                                    <input type="text" name="{{ input_name }}" value="{% if request.POST.input_name %}{{ request.POST.input_name }}{% else %}0{% endif %}" pattern="\d*">
+                                {% endwith %}
+                            </td>
+                        {% endfor %}
+                    </tr>
+                {% endfor %}
+            {% endfor %}
+        </tbody>
+    </table>
+    <button type="submit">Submit Setup Times</button>
+</form>
+</body>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Affichage des temps de préparation</title>
+    <style>
+        table, th, td {
+            border: 1px solid #ccc;
+            border-collapse: collapse;
+            padding: 5px;
+            text-align: center;
+        }
+        th {
+            background: #f0f0f0;
+        }
+        h1, h2 {
+            font-family: sans-serif;
+        }
+        h2 {
+            margin-top: 2em;
+        }
+    </style>
+</head>
+<body>
+<h1>Temps de préparation</h1>
+
+{% if machines and jobs_list %}
+    {% for m in machines %}
+        <h2>Machine {{ m }}</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Job précédent \ Job courant</th>
+                    {% for job_courant in jobs_list %}
+                        <th>{{ job_courant }}</th>
+                    {% endfor %}
+                </tr>
+            </thead>
+            <tbody>
+                {% for row in data.m %}
+                    <tr>
+                        <td><strong>{{ row.job_precedent }}</strong></td>
+                        {% for value in row.values %}
+                            <td>{{ value }}</td>
+                        {% endfor %}
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% endfor %}
+{% else %}
+    <p>Aucune donnée de préparation n’est disponible.</p>
+{% endif %}
+
+</body>
+</html>
